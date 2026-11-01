@@ -82,6 +82,8 @@ SPEAKER_MODEL = Path(_s("SPEAKER_MODEL", str(MODELS_DIR / "wespeaker_en_voxceleb
 SPEAKER_THRESHOLD = float(_s("SPEAKER_THRESHOLD", "0.62"))      # similarity above which two voices are the same person
 
 # --- screen watching ----------------------------------------------------------
+WATCH_MODE = _s("WATCH_MODE", "interval")   # interval: look every N seconds, keep a frame when something new is on screen | settled: only after the screen changed and then stood still
+WATCH_DROP_IRRELEVANT = _b("WATCH_DROP_IRRELEVANT", "0")   # 1 = delete watched frames the AI judges unrelated to the call; 0 = keep everything
 WATCH_STABLE = _i("WATCH_STABLE", 2)        # seconds the screen must stay unchanged
 WATCH_CHANGE = float(_s("WATCH_CHANGE", "0.02"))  # fraction of pixels that counts as changed
 WATCH_FORCE = _i("WATCH_FORCE", 90)         # keep a frame after this long of constant change

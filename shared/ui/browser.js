@@ -89,7 +89,8 @@ async function watchTick() {          // same algorithm as the desktop edition: 
   const sg = signature(c), now = Date.now() / 1000, cfg = (ST.cfg && ST.cfg.watch) || { change: 0.02, stable: 2, force: 90 };
   const changed = !W.prev || diff(sg, W.prev) > cfg.change; W.prev = sg;
   if (changed) { W.changeSince = W.changeSince || now; W.stableSince = null; } else { W.stableSince = W.stableSince || now; W.changeSince = null; }
-  const stable = !changed && (L.watch.interval >= cfg.stable || now - W.stableSince >= cfg.stable);
+  const everyInterval = cfg.mode === "interval";                      // a frame every interval when something new is on screen
+  const stable = everyInterval || (!changed && (L.watch.interval >= cfg.stable || now - W.stableSince >= cfg.stable));
   const forced = W.changeSince !== null && now - W.changeSince >= cfg.force;
   const differs = !W.lastKept || diff(sg, W.lastKept) > cfg.change;
   if ((stable || forced) && differs) {
@@ -167,7 +168,7 @@ P.act = Object.assign(P.act || {}, {
     const L = ST.live;
     if (L.watch.on) { await api("/api/watch", { sid: ST.sid, on: false }); return poll(); }
     if (!LSget("dbf.watchOk", false)) {
-      if (!await confirmBox("Let the AI watch your screen?", "Every few seconds this page looks at the screen you share. Frames that changed and then settled are sent to Claude as screenshots; unrelated ones are dropped. It stops when the call ends or is paused.", "Start watching")) return;
+      if (!await confirmBox("Let the AI watch your screen?", "Every few seconds this page looks at the screen you share. A screenshot is sent to the AI whenever something new is on screen, and every one is kept with the session. It stops when the call ends or is paused.", "Start watching")) return;
       LSset("dbf.watchOk", true);
     }
     if (!P.screen && !(await pickScreen())) return;

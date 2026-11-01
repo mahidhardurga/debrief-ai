@@ -61,7 +61,7 @@ def public_config(db: Session = Depends(get_db)):
             # what the shared UI (shared/ui/app.js) reads
             "platform": "web", "mock": s.llm_provider == "mock", "recordings_dir": "", "recordings_cloud_warning": False,
             "require_consent": s.require_consent, "form_url": "", "analyze_interval": s.analyze_interval,
-            "watch": {"change": s.watch_change, "stable": s.watch_stable, "force": s.watch_force},
+            "watch": {"mode": s.watch_mode, "change": s.watch_change, "stable": s.watch_stable, "force": s.watch_force},
             "asr_partials": s.asr_partials}
 
 

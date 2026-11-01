@@ -100,7 +100,9 @@ feedback.json, evaluation-form.md`. `sessions/day-summary-<date>.csv/.md` is upd
 | ACCURATE_MAX_DECODE | 6 | seconds; if the accurate model decodes 5 s of audio slower than this, refine is skipped |
 | SPEAKER_DEVICE | (all) | only loopback-capture output devices whose name contains this |
 | ALLOW_MODEL_DOWNLOAD | 1 | 1 downloads missing models into `desktop\models` on first use; 0 never goes online |
-| WATCH_STABLE / WATCH_CHANGE / WATCH_FORCE | 2 / 0.02 / 90 | screen watching thresholds |
+| WATCH_MODE | interval | `interval`: every N seconds (the interval you pick) a screenshot is kept when something new is on screen; `settled`: only after the screen changed and stood still |
+| WATCH_DROP_IRRELEVANT | 0 | 1 lets the AI delete watched frames it judges unrelated to the call; 0 keeps everything |
+| WATCH_STABLE / WATCH_CHANGE / WATCH_FORCE | 2 / 0.02 / 90 | thresholds (STABLE and FORCE only matter in `settled` mode) |
 | RECORDINGS_DIR | %LOCALAPPDATA%\DebriefAI\recordings | keep outside OneDrive |
 | RECORD_AUDIO / VIDEO_RECORD | 1 / 1 | default recording options |
 | REQUIRE_CONSENT | 1 | ask before the first recording of a session |

@@ -683,8 +683,8 @@ class Session:
             with self.llm():
                 res = analyzer.exhibit_analysis(self.ctx(previous=False), png, ex["question"], ex["note"])
             with self.lock:
-                if ex["auto"] and res.get("relevant") is False:
-                    self.exhibits.remove(ex)  # silently dropped: "not relevant"
+                if ex["auto"] and res.get("relevant") is False and get_settings().watch_drop_irrelevant:
+                    self.exhibits.remove(ex)  # only when WATCH_DROP_IRRELEVANT is on: by default everything that was watched stays
                     self.watch["kept"] = max(0, self.watch["kept"] - 1)
                     self._renumber_exhibits()
                 else:

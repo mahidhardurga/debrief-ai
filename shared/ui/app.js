@@ -647,7 +647,7 @@ const ACT = {
   async custint(ds,el){ const v=+el.value; if(v>=5&&v<=3600){ await api("/api/watch_interval",{sid:ST.sid,seconds:v}); ST.pops={}; poll(); } else toast("Enter 5 to 3600 seconds"); },
   async watch(){
     const L = ST.live; if(L.watch.on){ await api("/api/watch",{sid:ST.sid,on:false}); return poll(); }
-    if(!LS.get("dbf.watchOk",false)){ if(!await confirmBox("Let the AI watch your screen?","Every few seconds the app looks at the chosen window. Frames that changed and then settled are sent to Claude as screenshots; unrelated ones are dropped. It stops when the call ends or is paused.","Start watching")) return; LS.set("dbf.watchOk",true); }
+    if(!LS.get("dbf.watchOk",false)){ if(!await confirmBox("Let the AI watch your screen?","Every few seconds the app looks at the chosen window. A screenshot is sent to the AI whenever something new is on screen, and every one is kept with the session. It stops when the call ends or is paused.","Start watching")) return; LS.set("dbf.watchOk",true); }
     let src = L.source; if(!src){ src = await pickerDialog(); if(!src) return; }
     await api("/api/watch",{sid:ST.sid,on:true,source:src}); poll();
   },

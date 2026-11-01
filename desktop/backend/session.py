@@ -693,8 +693,8 @@ class Session:
             png = (self.dir / ex["file"]).read_bytes()
             res = analyzer.exhibit_analysis(self.ctx(previous=False), png, ex["question"], ex["note"])
             with self.lock:
-                if ex["auto"] and res.get("relevant") is False:
-                    self.exhibits.remove(ex)  # silently dropped: "not relevant"
+                if ex["auto"] and res.get("relevant") is False and config.WATCH_DROP_IRRELEVANT:
+                    self.exhibits.remove(ex)  # only when WATCH_DROP_IRRELEVANT is on: by default everything that was watched stays
                     self._renumber_exhibits()
                 else:
                     ex["analysis"], ex["status"], ex["error"] = res, "done", ""
@@ -789,13 +789,17 @@ class Session:
             stable = (not changed) and (self.watch["interval"] >= config.WATCH_STABLE or now - stable_since >= config.WATCH_STABLE)
             forced = change_since is not None and now - change_since >= config.WATCH_FORCE
             differs = last_kept is None or float(np.mean(np.abs(sig - last_kept) > 12)) > config.WATCH_CHANGE
+            if config.WATCH_MODE == "interval":          # every interval: keep the frame when something new is on screen
+                stable, forced = True, False
             if (stable or forced) and differs:
                 last_kept = sig
                 change_since = now if forced else change_since
                 png = wc.encode_png(wc.resize(wc.bgra_to_rgb(arr), 1600))
                 self.watch["kept"] += 1
                 self.add_exhibit(png, "(screen watch)", "", auto=True)
-            self.watch["status"] = ""
+                self.watch["status"] = ""
+            else:
+                self.watch["status"] = "nothing new on screen" if config.WATCH_MODE == "interval" else "waiting for the screen to settle"
 
     # ------------------------------------------------------------ recording (clips)
     def on_audio(self, role, label, block):

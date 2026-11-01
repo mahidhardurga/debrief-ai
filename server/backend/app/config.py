@@ -42,6 +42,8 @@ class Settings(BaseSettings):
     min_free_mb: int = 500                              # stop recording / refuse uploads below this free disk space
     recording_retention_days: int = 30                  # whole recordings older than this are deleted (0 keeps everything)
     max_upload_mb: int = 2048                           # largest single recording upload
+    watch_mode: str = "interval"                        # interval: keep a frame every N seconds when something new is on screen | settled: only after it stood still
+    watch_drop_irrelevant: bool = False                 # True: delete watched frames the AI judges unrelated to the call (default: keep everything)
     watch_stable: int = 2                               # screen watching: seconds the screen must stay unchanged
     watch_change: float = 0.02                          # fraction of pixels that counts as changed
     watch_force: int = 90                               # keep a frame after this long of constant change
