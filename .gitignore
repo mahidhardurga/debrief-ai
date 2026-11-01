@@ -1,0 +1,57 @@
+# secrets and local config
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.db
+
+
+# desktop choices made in the app
+desktop/settings.json
+
+# runtime data
+desktop/sessions*/
+desktop/.scratch*/
+server/backend/static/
+server/backend/data/
+.e2e/
+
+# downloaded voice model
+desktop/models/
+
+# GitHub Pages build output
+pages/dist/
+pages/node_modules/
+
+# pasted AI tokens (desktop)
+desktop/secrets.json
+
+# extra safety nets: never commit credentials, keys, logs, recordings, editor and OS files
+.env.*
+!.env.example
+secrets.json
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+token*.txt
+*.log
+*.part
+*.wav
+*.webm
+*.mp4
+*.onnx
+**/sessions/
+**/recordings/
+**/node_modules/
+**/dist/
+.claude/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

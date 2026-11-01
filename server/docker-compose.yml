@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: debrief
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: debrief
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U debrief"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql+psycopg://debrief:${POSTGRES_PASSWORD}@db:5432/debrief
+    ports: ["8000:8000"]
+    volumes:
+      - appdata:/data                       # exhibits (screenshots)
+      - claude-login:/home/app/.claude      # only used with CLAUDE_AUTH=shared; per-user logins are stored encrypted in the database
+      - hf-cache:/home/app/.cache/huggingface   # Whisper models
+
+volumes: { pgdata: {}, appdata: {}, claude-login: {}, hf-cache: {} }

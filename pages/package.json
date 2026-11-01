@@ -1,0 +1,1 @@
+{ "name": "debrief-ai-pages", "private": true, "type": "module", "scripts": { "test": "node tests/golden.test.mjs && node tests/engine.test.mjs" } }

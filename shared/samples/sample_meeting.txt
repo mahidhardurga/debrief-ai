@@ -1,0 +1,9 @@
+You: Let's review the release plan for next sprint.
+Others: The payment service migration is on track, we expect to finish testing by Thursday.
+You: Good. Do we have a decision on the rollout strategy?
+Others: We agreed to use a blue green deployment, and Priya will own the runbook.
+You: Perfect. What are the open risks?
+Others: The database migration might take longer than the maintenance window, we need to check with the DBA.
+You: Okay. Sam, can you confirm the window with the DBA by Friday?
+Others: Yes, I will confirm with the DBA by Friday and report back.
+You: Great, then I will send the recap tonight.

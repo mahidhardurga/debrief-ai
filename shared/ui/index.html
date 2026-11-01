@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debrief AI</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="app">
+  <aside id="side">
+    <div class="brand serif">Debrief <b>AI</b></div>
+    <div class="tools"><select id="modeSel"></select><button class="primary" data-act="new" title="New session">+</button></div>
+    <div id="sbList"></div>
+    <div id="today"></div>
+  </aside>
+  <div id="scrim" data-act="closeSide"></div>
+  <main id="main">
+    <header id="top"></header>
+    <div id="view"></div>
+  </main>
+  <aside id="chat"></aside>
+</div>
+<div id="modalHost"></div>
+<div id="toasts"></div>
+
+<script src="browser.js"></script>
+<script src="platform.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

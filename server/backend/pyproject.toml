@@ -1,0 +1,9 @@
+[tool.ruff]
+line-length = 140
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B904", "E741", "E501", "E701", "E702", "E731", "B008", "UP007"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = ["ignore::jwt.warnings.InsecureKeyLengthWarning"]

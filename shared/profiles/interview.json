@@ -1,0 +1,77 @@
+{
+  "id": "interview",
+  "name": "Interview",
+  "description": "Technical interview for the role you enter. The AI builds the topic list for that role, adds topics live as the conversation goes, and writes a scored final report.",
+  "you_label": "Interviewer",
+  "other_label": "Candidate",
+  "subject_label": "Candidate name",
+  "extra": {
+    "label": "Level",
+    "options": ["Junior (0-3 yrs)", "Mid (3-6 yrs)", "Senior (6-10 yrs)", "Lead / Architect (10+ yrs)"],
+    "default": "Mid (3-6 yrs)"
+  },
+  "context_hint": "Optional: paste the resume or job description",
+  "vocabulary": "Java, Spring Boot, Spring Cloud, Spring Security, Spring Data JPA, Hibernate, Kafka, RabbitMQ, microservices, REST, gRPC, OAuth2, JWT, Docker, Kubernetes, EKS, ECS, Fargate, Lambda, S3, SQS, SNS, DynamoDB, RDS, Aurora, CloudWatch, CloudFormation, Terraform, IAM, VPC, API Gateway, Jenkins, CI/CD, Resilience4j, circuit breaker, saga, CQRS, idempotency, HashMap, ConcurrentHashMap, CompletableFuture, JUnit, Mockito, Testcontainers, Redis.",
+  "system": "You assist a senior engineer who is interviewing a candidate for the role named in the RUBRIC below. Be fair and evidence-based. Only score areas that were actually asked about or demonstrated (score null otherwise). Cite short evidence from the conversation. Flag wrong statements with the correct fact. Never judge on accent, age, gender or any protected trait. Produce topic-wise feedback: one entry per technical topic actually discussed, in order, merging follow-ups; the 'answered' field is a faithful summary of what the candidate said; give a rating, concrete feedback, and what a stronger answer would include; use 'not enough evidence' when the answer was too brief. Screen exhibits (screenshots) are hard evidence and each becomes its own topic (\"Coding: ...\"). CALIBRATION (important): judge against the candidate's stated level, not an expert. A correct, well-structured textbook answer meets expectations for a mid-level candidate and scores 3. A score of 2 is clearly weak or cannot apply the concept. Reserve 4-5 for trade-offs, failure handling and production insight. Do not mark down for depth the interviewer never probed. Code typed live or read from a screenshot has typos, so never say it 'would not compile' because of typos; judge approach, complexity and edge cases. Unassessed areas never count against the candidate. Recommend reject only with clear evidence (several areas below expectations or a serious red flag).",
+  "rubric": {
+    "role": "Java / Spring Boot Microservices Developer (AWS)",
+    "scale": "relative to the stated level: 1 major gaps, 2 below expectations (textbook only), 3 meets expectations, 4 clearly exceeds, 5 exceptional",
+    "advance_threshold": 3.0,
+    "areas": [
+      {"id": "core_java", "name": "Core Java", "weight": 2, "covers": "OOP, collections, generics, streams, exceptions, memory/GC, Java 8-21 features", "hint": "How does HashMap handle collisions, and what changed in Java 8?"},
+      {"id": "concurrency", "name": "Concurrency", "weight": 1, "covers": "threads, executors, CompletableFuture, synchronization, thread safety", "hint": "When would you pick CompletableFuture over a fixed thread pool?"},
+      {"id": "spring_boot", "name": "Spring & Boot", "weight": 2, "covers": "DI, auto-configuration, beans lifecycle, profiles, actuator, Spring Data, transactions", "hint": "How does Spring Boot auto-configuration decide which beans to create?"},
+      {"id": "rest_api", "name": "REST & API Design", "weight": 1, "covers": "resource design, status codes, versioning, pagination, idempotency, error handling", "hint": "How would you design an idempotent payment endpoint?"},
+      {"id": "data", "name": "Data & Persistence", "weight": 1, "covers": "SQL/NoSQL, JPA/Hibernate, N+1, indexing, transactions, isolation levels", "hint": "How do you detect and fix an N+1 query in JPA?"},
+      {"id": "microservices", "name": "Microservices Architecture", "weight": 2, "covers": "service boundaries, communication, saga, CQRS, data ownership, gateways", "hint": "How would you handle a transaction spanning three services?"},
+      {"id": "messaging", "name": "Messaging & Async", "weight": 1, "covers": "Kafka/SQS/SNS, ordering, at-least-once delivery, dead letters", "hint": "How do you make a Kafka consumer idempotent?"},
+      {"id": "resilience", "name": "Resilience & Observability", "weight": 1, "covers": "timeouts, retries, circuit breakers, logging, metrics, tracing", "hint": "What happens when a downstream service is slow, and how do you protect callers?"},
+      {"id": "security", "name": "Security", "weight": 1, "covers": "OAuth2/JWT, Spring Security, secrets, OWASP basics", "hint": "How do you validate a JWT in a resource server?"},
+      {"id": "testing", "name": "Testing", "weight": 1, "covers": "unit/integration tests, mocking, Testcontainers, test pyramid", "hint": "How do you test a repository against a real database?"},
+      {"id": "aws_compute", "name": "AWS Compute & Deployment", "weight": 2, "covers": "EC2/ECS/EKS/Lambda, containers, deployment strategies", "hint": "When would you choose Lambda over ECS Fargate?"},
+      {"id": "aws_data", "name": "AWS Data & Storage", "weight": 1, "covers": "S3, RDS/Aurora, DynamoDB, caching, backups", "hint": "How would you model access patterns in DynamoDB?"},
+      {"id": "aws_security", "name": "AWS Networking, Security & IAM", "weight": 1, "covers": "VPC, subnets, security groups, IAM roles/policies, KMS", "hint": "How does a service in a private subnet reach S3 safely?"},
+      {"id": "aws_ops", "name": "AWS Observability & CI/CD", "weight": 1, "covers": "CloudWatch, pipelines, IaC, blue/green, rollbacks", "hint": "How would you roll back a bad release automatically?"},
+      {"id": "problem_solving", "name": "Problem Solving & Communication", "weight": 1, "covers": "coding approach, complexity, edge cases, clarity of explanation", "hint": "Walk me through how you would debug a production latency spike."}
+    ]
+  },
+  "live_sections": [
+    {"id": "topics", "title": "Topic-wise feedback so far", "type": "topics"},
+    {"id": "followups", "title": "Ask next", "type": "list", "max": 3, "detail": "up to 3 sharp follow-up questions the interviewer could ask next"},
+    {"id": "flags", "title": "Flags", "type": "flags", "detail": "wrong statements (with the correct fact), red flags or notable strengths"},
+    {"id": "impression", "title": "Impression", "type": "text", "detail": "one or two sentences on how the candidate is doing so far"}
+  ],
+  "final_sections": [
+    {"id": "topics", "title": "Topic-wise feedback", "type": "topics"},
+    {"id": "strengths", "title": "Strengths", "type": "list"},
+    {"id": "gaps", "title": "Gaps", "type": "list"},
+    {"id": "flags", "title": "Red flags", "type": "flags"},
+    {"id": "probe", "title": "Next round should probe", "type": "list"},
+    {"id": "questions", "title": "Suggested next-round questions", "type": "list"}
+  ],
+  "drafts": [
+    {"id": "topic_feedback", "title": "Topic-wise feedback", "filename": "topic-wise-feedback.md", "always": true, "detail": "markdown: the topic-wise feedback for the interview notes"},
+    {"id": "advance_handoff", "title": "Next-round handoff", "filename": "next-round-handoff.md", "detail": "markdown handoff for the next interviewer: summary, strengths, what to probe, suggested questions"},
+    {"id": "reject_feedback", "title": "Rejection feedback", "filename": "rejection-feedback.md", "detail": "polite, specific feedback for the candidate; no scores and no protected traits"}
+  ],
+  "decisions": [
+    {"id": "advance", "label": "Advance to next round", "style": "ok", "short": "Selected", "draft": "advance_handoff"},
+    {"id": "reject", "label": "Reject", "style": "bad", "short": "Not selected", "draft": "reject_feedback"}
+  ],
+  "exhibit": {
+    "question_label": "What did you ask?",
+    "note_label": "What did the candidate do or say?",
+    "prompt": "Transcribe any code verbatim, work out what it does, and check it against what the interviewer asked (edge cases, complexity, idiom). Report only justified problems and ignore typos that come from live typing. Describe non-code screens faithfully."
+  },
+  "form": {
+    "title": "Debrief evaluation form",
+    "proficiency_options": ["Beginner", "Intermediate", "Advanced", "Expert", "N / A - Not Applicable"],
+    "rating_options": ["1 - Did not meet expectations", "2 - Met expectations with reservations", "3 - Met expectations", "4 - Exceeded expectations", "5 - Significantly exceeded expectations", "N / A - Not Applicable"],
+    "behavioral": ["Analytical Ability", "Client Readiness", "Collaborative & Inclusive", "Communication", "Leading Others", "Strategy and Innovation", "Planning and Organizing", "Industry Knowledge"],
+    "technical_examples": ["Fullstack- Java", "Migration - AppMod Developer (AWS Java)"],
+    "max_technical": 3,
+    "categories": ["No further interest/Reject", "Proceed to next round of an interview", "Offer (to be selected at final round)", "Candidate on hold"],
+    "category_for": {"advance": "Proceed to next round of an interview", "reject": "No further interest/Reject"},
+    "instructions": "Rate only behaviors you actually observed. Use N / A when there was no evidence. Photo match and self-declaration are completed by the interviewer."
+  }
+}

@@ -1,0 +1,14 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+sqlalchemy>=2.0
+alembic>=1.13
+psycopg[binary]>=3.2
+pydantic>=2.8
+pydantic-settings>=2.4
+pyjwt>=2.9
+bcrypt>=4.2
+cryptography>=43
+python-multipart>=0.0.9
+numpy>=1.26
+faster-whisper>=1.0
+sherpa-onnx>=1.10

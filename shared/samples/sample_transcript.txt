@@ -1,0 +1,16 @@
+Interviewer: Thanks for joining. Let's start with Core Java. How does a HashMap handle collisions?
+Candidate: It uses buckets with a linked list, and since Java 8 a bucket converts to a balanced tree when it gets long, so lookups stay log n.
+Interviewer: Good. What happens if you use a mutable object as a key?
+Candidate: If the hashCode changes after insertion you can't find the entry again, so keys should be immutable.
+Interviewer: Moving to Spring Boot. How does auto configuration work?
+Candidate: Spring Boot reads the auto configuration classes listed in the imports file and applies them with conditional annotations like ConditionalOnClass and ConditionalOnMissingBean.
+Interviewer: Nice. Now microservices. How would you handle a transaction across three services?
+Candidate: I would use the saga pattern, either choreography with Kafka events or an orchestrator, with compensating actions for failures.
+Interviewer: How do you make the Kafka consumer idempotent?
+Candidate: Store the event id in a table and skip duplicates, so processing twice has the same effect.
+Interviewer: Let's talk AWS. When would you choose Lambda over ECS Fargate?
+Candidate: Lambda for short event driven work with spiky traffic, Fargate for long running services or when I need more control over the runtime.
+Interviewer: What happens when a downstream service is slow?
+Candidate: I would set timeouts, add retries with backoff, and a circuit breaker like Resilience4j so callers fail fast.
+Interviewer: Great, that covers what I wanted. Any questions for me?
+Candidate: Yes, what does the team's deployment pipeline look like?

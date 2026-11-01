@@ -1,0 +1,9 @@
+faster-whisper
+soundcard
+numpy
+flask
+mss
+soundfile
+imageio-ffmpeg
+pywebview
+sherpa-onnx>=1.10

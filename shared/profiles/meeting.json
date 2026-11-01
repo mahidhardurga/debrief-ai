@@ -1,0 +1,27 @@
+{
+  "id": "meeting",
+  "name": "Meeting notes (Teams / Zoom / Slack / any call)",
+  "description": "General meetings: summary, decisions, action items, open questions and risks, plus a recap email.",
+  "you_label": "You",
+  "other_label": "Others",
+  "subject_label": "Meeting title",
+  "context_hint": "Optional: agenda, attendees or background",
+  "vocabulary": "",
+  "system": "You take notes for the user during a work meeting. Be concise and faithful to what was said. Never invent decisions, owners or dates; leave them empty when unknown.",
+  "live_sections": [
+    {"id": "summary", "title": "Summary so far", "type": "text", "detail": "3-5 sentence running summary"},
+    {"id": "decisions", "title": "Decisions", "type": "list"},
+    {"id": "actions", "title": "Action items", "type": "actions"},
+    {"id": "questions", "title": "Open questions", "type": "list"}
+  ],
+  "final_sections": [
+    {"id": "decisions", "title": "Decisions", "type": "list"},
+    {"id": "actions", "title": "Action items", "type": "actions"},
+    {"id": "questions", "title": "Open questions", "type": "list"},
+    {"id": "risks", "title": "Risks", "type": "list"}
+  ],
+  "drafts": [
+    {"id": "recap_email", "title": "Recap email", "filename": "recap-email.md", "always": true, "detail": "a short recap email to attendees: summary, decisions, action items with owners and dates"}
+  ],
+  "decisions": []
+}
