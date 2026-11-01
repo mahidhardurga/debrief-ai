@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm ca-c
 RUN useradd --create-home --uid 10001 app
 WORKDIR /app
 COPY server/backend/requirements.txt ./
-RUN pip install -r requirements.txt
+RUN pip install --default-timeout=300 --retries 10 -r requirements.txt
 # Speaker-recognition model (26 MB), baked in so the server works offline.
 RUN mkdir -p /app/models && python -c "import urllib.request as u; u.urlretrieve('https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-recongition-models/wespeaker_en_voxceleb_resnet34_LM.onnx', '/app/models/wespeaker_en_voxceleb_resnet34_LM.onnx')"
 COPY server/backend/ ./
